@@ -5,7 +5,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production nodemon ./bin/www",
     "dev": "cross-env NODE_ENV=development nodemon ./bin/www",
-    "pm2":   "pm2 start cross-env NODE_ENV=production nodemon ./bin/www"
+    "test": "pm2 start ecosystem.config.js --only development --watch",
+    "pro": "pm2 start ecosystem.config.js --only production --watch"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
