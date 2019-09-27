@@ -13,7 +13,8 @@ if(env === 'development'){ //开发环境
         port: '3306',
         user: 'root',
         password: 'WAwlp4762237*',
-        database: 'test-shoppingmall'
+        database: 'test-shoppingmall',
+        useConnectionPooling: true
     }
 
 }
@@ -25,7 +26,8 @@ if(env === 'production'){
         port: '3306',
         user: 'root',
         password: 'WAwlp4762237*',
-        database: 'test-shoppingmall'
+        database: 'test-shoppingmall',
+        useConnectionPooling: true
     }
 }
 module.exports = {

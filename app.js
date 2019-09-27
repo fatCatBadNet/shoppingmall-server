@@ -25,13 +25,14 @@ const {
 } = require('./schedule/index')
 
 
-let excel = xlsx.readFile('./static/newtest.xlsx');
+let excel = xlsx.readFile('./static/normalmodel.xlsx');
 let SheetNames = excel.SheetNames; //表名
 let sheet = excel.Sheets[SheetNames[0]]; //第一个表的数据具体对象
 xlsx.utils.sheet_to_json(sheet).map((row, index) => {
   let ENbrand, CNbrand, type, placeList, placeDiscountList;
   placeList = [];
   placeDiscountList = [];
+  type='normal';
   for (const key in row) {
     if (key === '类别') {
       type = row[key];
@@ -39,7 +40,7 @@ xlsx.utils.sheet_to_json(sheet).map((row, index) => {
       CNbrand = row[key];
     } else if (key === '品牌') {
       ENbrand = row[key];
-    } else {
+    } else if(key !== '分类') {
       placeList.push(key);
       let obj = {
         key: key,
@@ -50,11 +51,10 @@ xlsx.utils.sheet_to_json(sheet).map((row, index) => {
   }
   placeList = JSON.stringify(placeList);
   placeDiscountList = JSON.stringify(placeDiscountList);
-  const sql = `INSERT INTO cash_model (EN_brand,CN_brand,type,place_list,place_discount_list) 
+  const sql = `INSERT INTO normal_model (EN_brand,CN_brand,type,place_list,place_discount_list) 
   VALUES ("${ENbrand}","${CNbrand}","${type}",'${placeList}','${placeDiscountList}')`;
   // exec(sql).then(data =>{
   //   // console.log(data);
-
   // })
 })
 
